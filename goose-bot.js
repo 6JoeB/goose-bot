@@ -6,12 +6,13 @@ const client = new Discord.Client();
 
 const honkResponses = ["Honk", "HONK", "HONK HONK HOOONK", "Honk honk", "HONK HOOONK", "Honk hooonk, HONK"]
 const greetingResponses = ["https://giphy.com/gifs/hello-goose-untitled-simulator-Ws9ksgMH6nbGemB3Yh"]
-const angryResponses = ["https://giphy.com/gifs/untitled-goose-beaker-U4RX7LYnOywv1us4VP", "https://giphy.com/gifs/goose-7wq5iawqr1IZy", "https://giphy.com/gifs/goose-3fM0YdrBuHiiQ"]
 
 const greetings = ["hi", "hello", "yo", "howdy", "hey", "hows it going", "how’s it going", "how are you doing", "what’s up", "whats up"];
 const gooseNameVariations = ["goose", "goose bot", "goosebot", "goosey", "honker"];
 const translations = ["Give me bread", "What if I'm just saying honk but you can't tell because everything I say is honk", 
-"Can I borrow a tenner", "What you saying",];
+"Can I borrow a tenner", "What you saying", "What are you looking at https://giphy.com/gifs/goose-3fM0YdrBuHiiQ", 
+"I'll ban you" , "Consider this a warning of what is to come https://giphy.com/gifs/goose-7wq5iawqr1IZy",
+ "Consider this a warning of what is to come https://giphy.com/gifs/untitled-goose-beaker-U4RX7LYnOywv1us4VP"];
 
 probablityCalculator = () => {
     if (Math.random > 0.8) {
@@ -65,12 +66,6 @@ client.on('message', msg => {
                     msg.reply("Translation: \"" + (translations[Math.floor(Math.random() * translations.length)]) + " " + (msg.author.username) +"\". Translated by Goosgle Translate (c)");
                 }
         }
-    }
-})
-
-client.on('message', msg => {
-    if (msg.content === "test" ) {
-        msg.reply("honk");
     }
 })
 
