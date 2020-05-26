@@ -14,9 +14,9 @@ const translations = ["Give me bread", "What if I'm just saying honk but you can
 "I'll ban you" , "Consider this a warning of what is to come https://giphy.com/gifs/goose-7wq5iawqr1IZy",
  "Consider this a warning of what is to come https://giphy.com/gifs/untitled-goose-beaker-U4RX7LYnOywv1us4VP"];
 
-probablityCalculator = () => {
-    if (Math.random > 0.8) {
-        return true
+function probablityCalculator(){
+    if (Math.random() > 0.9) {
+        return true;
     }
 }
 
@@ -26,7 +26,6 @@ messageInterpreter = (msg) => {
     var messageContainsGooseName = false;
 
     while (!messageSent) {
-
         for (i = 0; i < greetings.length; i++) {
             if (msg.content.toLowerCase().includes(greetings[i])) {
                 messageContainsGreeting = true;
@@ -57,14 +56,22 @@ client.on('message', msg => {
     if (msg.author.username !== "Goose Bot") {
         switch (messageInterpreter(msg)) {
             case "GREETING": 
-                msg.reply(greetingResponses[Math.floor(Math.random() * greetingResponses.length)]);
+                msg.reply(greetingResponses[Math.floor(Math.random() * greetingResponses.length)])
+                .then(() => console.log(`Sent a reply to ${message.author.username}`))
+                .catch(console.error);
             break;
 
             default:
-                if (probablityCalculator) {
-                    msg.reply(honkResponses[Math.floor(Math.random() * honkResponses.length)]);
-                    msg.reply("Translation: \"" + (translations[Math.floor(Math.random() * translations.length)]) + " " + (msg.author.username) +"\". Translated by Goosgle Translate (c)");
+                if (probablityCalculator()) {
+                    msg.reply(honkResponses[Math.floor(Math.random() * honkResponses.length)])
+                    .then(() => console.log(`Sent a reply to ${message.author.username}`))
+                    .catch(console.error);
+
+                    msg.reply("Translation: \"" + (translations[Math.floor(Math.random() * translations.length)]) + " " + (msg.author.username) +"\". Translated by Goosgle Translate (c)")
+                    .then(() => console.log(`Sent a reply to ${message.author.username}`))
+                    .catch(console.error);
                 }
+                break;
         }
     }
 })
