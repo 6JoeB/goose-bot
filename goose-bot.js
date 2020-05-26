@@ -10,12 +10,12 @@ const greetingResponses = ["https://giphy.com/gifs/hello-goose-untitled-simulato
 const greetings = ["hi", "hello", "yo", "howdy", "hey", "hows it going", "how’s it going", "how are you doing", "what’s up", "whats up"];
 const gooseNameVariations = ["goose", "goose bot", "goosebot", "goosey", "honker"];
 const translations = ["Give me bread", "What if I'm just saying honk but you can't tell because everything I say is honk", 
-"Can I borrow a tenner", "What you saying", "What are you looking at https://giphy.com/gifs/goose-3fM0YdrBuHiiQ", 
-"I'll ban you" , "Consider this a warning of what is to come https://giphy.com/gifs/goose-7wq5iawqr1IZy",
- "Consider this a warning of what is to come https://giphy.com/gifs/untitled-goose-beaker-U4RX7LYnOywv1us4VP"];
+"Can I borrow a tenner", "What you saying", "https://giphy.com/gifs/goose-3fM0YdrBuHiiQ What are you looking at", 
+"I'll ban you" , "https://giphy.com/gifs/goose-7wq5iawqr1IZy Consider this a warning of what is to come",
+ "https://giphy.com/gifs/untitled-goose-beaker-U4RX7LYnOywv1us4VP Consider this a warning of what is to come", "You wanna play Runescape?"];
 
 function probablityCalculator(){
-    if (Math.random() > 0.9) {
+    if (Math.random() > 0) {
         return true;
     }
 }
@@ -52,28 +52,28 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+    if (msg.author.bot) {return};
 
-    if (msg.author.username !== "Goose Bot") {
-        switch (messageInterpreter(msg)) {
-            case "GREETING": 
-                msg.reply(greetingResponses[Math.floor(Math.random() * greetingResponses.length)])
-                .then(() => console.log(`Sent a reply to ${message.author.username}`))
-                .catch(console.error);
-            break;
+    switch (messageInterpreter(msg)) {
+        case "GREETING": 
+            msg.reply(greetingResponses[Math.floor(Math.random() * greetingResponses.length)])
+            .then(() => console.log(`Sent a greeting reply to ${msg.author.username}`))
+            .catch(console.error);
+        break;
 
-            default:
-                if (probablityCalculator()) {
-                    msg.reply(honkResponses[Math.floor(Math.random() * honkResponses.length)])
-                    .then(() => console.log(`Sent a reply to ${message.author.username}`))
-                    .catch(console.error);
+    default:
+        if (probablityCalculator()) {
+            msg.reply(honkResponses[Math.floor(Math.random() * honkResponses.length)])
+            .then(() => console.log(`Sent a reply to ${msg.author.username}`))
+            .catch(console.error);
 
-                    msg.reply("Translation: \"" + (translations[Math.floor(Math.random() * translations.length)]) + " " + (msg.author.username) +"\". Translated by Goosgle Translate (c)")
-                    .then(() => console.log(`Sent a reply to ${message.author.username}`))
-                    .catch(console.error);
-                }
-                break;
+            msg.reply("Translation: \"" + (translations[Math.floor(Math.random() * translations.length)]) + " " + (msg.author.username) +"\". Translated by Goosgle Translate (c)")
+            .then(() => console.log(`Sent a reply to ${msg.author.username}`))
+            .catch(console.error)
         }
+        break;
     }
+    
 })
 
 client.login(process.env.DISCORD_TOKEN);
